@@ -7,7 +7,7 @@ public class TrueFalseQ extends Question {
 
     // Constructor
     public TrueFalseQ(String source, String title, boolean answer) {
-        super(source, title);
+        super(source, title, "True or False");
         this.answer = answer;
     }
 

@@ -9,7 +9,7 @@ public class MultiChoiceQ extends Question {
 
     // Constructor
     public MultiChoiceQ(String source, String title, String choices, String correctChoices) {
-        super(source, title);
+        super(source, title, "Multiple Choice");
         this.choices = toArray(choices);
         this.correctChoices = toArray(correctChoices);
     }
