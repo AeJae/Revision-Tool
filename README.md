@@ -4,8 +4,7 @@ An application that enables you to create question banks and test your knowledge
 To add your own questions, create a .txt file with a suitable name, place it in the top level directory, and use the template below to create your questions:
 
 ```plaintext
-questionType,questionSource,questionTitle,[questionOptions]&questionType,questionSource,questionTitle,[questionOptions]&
-questionType,questionSource,questionTitle,[questionOptions]&questionType,questionSource,questionTitle,[questionOptions]&
+questionType,questionSource,questionTitle,[questionOptions]&questionType,questionSource,questionTitle,[questionOptions]&questionType,questionSource,questionTitle,[questionOptions]&
 ```
 Then from within the program, when asked for the text file, enter the name you gave it (excluding the .txt).
 
@@ -14,7 +13,7 @@ Then from within the program, when asked for the text file, enter the name you g
 ### Multiple Choice
 `MultiChoice$<Source>$<Question>$<Choices>$<Correct Choices>&`
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are four options:$[Option 1, Option 2, Option 3, Option 4]$[Option 2, Option4]&
+MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1, Option 2, Option 3]$[Option 1, Option3]&
 ```
 
 ### True or False
