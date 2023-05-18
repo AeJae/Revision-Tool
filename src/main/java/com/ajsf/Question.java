@@ -11,6 +11,22 @@ public abstract class Question {
         this.title = title;
     }
 
+    // Misc Methods
+    protected static String[] toArray(String string) {
+        return string.substring(1, string.length()-1).split(";");
+    }
+
+    protected static Boolean inArray(String input, String[] array) {
+        for (String s : array) {
+            if (s.equalsIgnoreCase(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public abstract String toString();
+
     // Mutators
     public void setSource(String source) {
         this.source = source;
