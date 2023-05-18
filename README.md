@@ -16,28 +16,28 @@ You're good to go!
 - `;` is used to separate items in a list.
 
 ### Multiple Choice
-`MultiChoice$<Source>$<Question>$<Choices>$<Correct Choices>&`
+`Multi$<Source>$<Question>$<Choices>$<Correct Choices>&`
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&
+Multi$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&
 ```
 `<Choices>` and `<Correct Choices>` must always be in list form, even if there is only one option. `<Correct Choices>` must be an integer representing the correct item(s) from the `<Choices>` list. It is NOT zero indexed.
 
 ### True or False
-`TrueFalse$<Source>$<Question>$<Correct Option>&`
+`TF$<Source>$<Question>$<Correct Option>&`
 ```plaintext
-TrueFalse$Lecture 7 Part 1$This is a repository.$True&
+TF$Lecture 7 Part 1$This is a repository.$True&
 ```
 
 ### Text Input
-`TextInput$<Source>$<Question/Fill Blank>$<Correct Entries>&`
+`Text$<Source>$<Question/Fill Blank>$<Correct Entries>&`
 ```plaintext
-TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
+Text$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 ```
 `<Correct Entries>` must always be in list form, even if there is only one option.
 
 ### A Short Completed File
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&TrueFalse$Lecture 7 Part 1$This is a repository.$True&TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
+Multi$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&TF$Lecture 7 Part 1$This is a repository.$True&Text$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 ```
 
 ## A Project by AJSF ([@AeJae](https://github.com/AeJae))
