@@ -22,12 +22,12 @@ public class TextInputQ extends Question {
     // Check Answer
     @Override
     public Boolean isCorrect(String entry) {
-        return inArray(entry, this.getCorrectEntries());
+        return inArray(entry, this.getAnswer());
     }
 
 
     // Accessors
-    public String[] getCorrectEntries() {
+    public String[] getAnswer() {
         return correctEntries;
     }
 }

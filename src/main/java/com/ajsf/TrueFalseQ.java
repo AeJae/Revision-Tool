@@ -30,12 +30,18 @@ public class TrueFalseQ extends Question {
             System.out.println("Answer should be either true or false.");
             return false;
         }
-        return userAnswer == this.getAnswer();
+        return userAnswer == this.answer;
     }
 
 
     // Accessors
-    public Boolean getAnswer() {
-        return answer;
+    public String[] getAnswer() {
+        String[] ans = new String[1];
+        if (answer) {
+            ans[0] = "True";
+        } else {
+            ans[0] = "False";
+        }
+        return ans;
     }
 }

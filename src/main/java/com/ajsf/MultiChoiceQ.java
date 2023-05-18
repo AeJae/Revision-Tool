@@ -31,7 +31,7 @@ public class MultiChoiceQ extends Question {
     // Check Answer
     @Override
     public Boolean isCorrect(String entry) {
-        return inArray(entry, this.getCorrectChoices());
+        return inArray(entry, this.getAnswer());
     }
 
 
@@ -40,7 +40,7 @@ public class MultiChoiceQ extends Question {
         return choices;
     }
 
-    public String[] getCorrectChoices() {
+    public String[] getAnswer() {
         return correctChoices;
     }
 }
