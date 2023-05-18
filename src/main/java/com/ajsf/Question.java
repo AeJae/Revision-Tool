@@ -16,15 +16,6 @@ public abstract class Question {
         return string.substring(1, string.length()-1).split(";");
     }
 
-    protected static Boolean inArray(String input, String[] array) {
-        for (String s : array) {
-            if (s.equalsIgnoreCase(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public abstract String toString();
 
     // Mutators
