@@ -6,6 +6,16 @@ import java.util.ArrayList;
 public class QuestionBank {
     private ArrayList<Question> questions = new ArrayList<>();
 
+    public String toString() {
+        StringBuilder s = new StringBuilder("\nBANK OF SIZE " + this.bankSize() + ":");
+        int count = 0;
+        for (Question q : questions) {
+            s.append("\n\t0x").append(count).append(": ").append(q.getType()).append(": ").append(q.getTitle());
+            count++;
+        }
+        return s.toString();
+    }
+
     public void addQuestion(Question q) {
         questions.add(q);
     }

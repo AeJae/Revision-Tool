@@ -2,12 +2,14 @@ package com.ajsf;
 
 public abstract class Question {
     // Attributes
+    private final String type;
     private final String source;
     private final String title;
 
 
     // Constructor
-    public Question(String source, String title) {
+    public Question(String source, String title, String type) {
+        this.type = type;
         this.source = source;
         this.title = title;
     }
@@ -42,5 +44,9 @@ public abstract class Question {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getType() {
+        return type;
     }
 }

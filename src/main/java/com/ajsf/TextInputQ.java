@@ -8,7 +8,7 @@ public class TextInputQ extends Question {
 
     // Constructor
     public TextInputQ(String source, String title, String correctEntries) {
-        super(source, title);
+        super(source, title, "Text Input");
         this.correctEntries = toArray(correctEntries);
     }
 
