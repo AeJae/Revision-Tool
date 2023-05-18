@@ -10,11 +10,15 @@ An application that enables you to create question banks and test your knowledge
 You're good to go!
 
 ## Examples
+- `&` is used to separate questions.
+- `$` is used to separate sections within a question.
+- `[]` is used to denote a list.
+- `;` is used to separate items in a list.
 
 ### Multiple Choice
 `MultiChoice$<Source>$<Question>$<Choices>$<Correct Choices>&`
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1, Option 2, Option 3]$[Option 1, Option3]&
+MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[Option 1; Option3]&
 ```
 
 ### True or False
@@ -26,12 +30,12 @@ TrueFalse$Lecture 7 Part 1$This is a repository.$True&
 ### Text Input
 `TextInput$<Source>$<Question/Fill Blank>$<Correct Entries>&`
 ```plaintext
-TextInput$Lecture 5 Part 2$What is this question for?$[show,example,the readme]&
+TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 ```
 
 ### A Short Completed File
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1, Option 2, Option 3]$[Option 1, Option3]&TrueFalse$Lecture 7 Part 1$This is a repository.$True&TextInput$Lecture 5 Part 2$What is this question for?$[show,example,the readme]&
+MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[Option 1; Option3]&TrueFalse$Lecture 7 Part 1$This is a repository.$True&TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 ```
 
 ## A Project by AJSF ([@AeJae](https://github.com/AeJae))
