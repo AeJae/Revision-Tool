@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome!");
+        System.out.println("Welcome!\nUse -exit to view stats and close, and use -answer to view question answers.");
 
         // Keep asking for a file until a valid one is given or the user asks to exit.
         while (true) {
