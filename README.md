@@ -18,9 +18,9 @@ You're good to go!
 ### Multiple Choice
 `MultiChoice$<Source>$<Question>$<Choices>$<Correct Choices>&`
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[Option 1; Option3]&
+MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&
 ```
-`<Choices>` and `<Correct Choices>` must always be in list form, even if there is only one option.
+`<Choices>` and `<Correct Choices>` must always be in list form, even if there is only one option. `<Correct Choices>` must be an integer representing the correct item(s) from the `<Choices>` list. It is NOT zero indexed.
 
 ### True or False
 `TrueFalse$<Source>$<Question>$<Correct Option>&`
@@ -37,7 +37,7 @@ TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 
 ### A Short Completed File
 ```plaintext
-MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[Option 1; Option3]&TrueFalse$Lecture 7 Part 1$This is a repository.$True&TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
+MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&TrueFalse$Lecture 7 Part 1$This is a repository.$True&TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 ```
 
 ## A Project by AJSF ([@AeJae](https://github.com/AeJae))
