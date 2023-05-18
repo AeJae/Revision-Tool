@@ -34,6 +34,8 @@ public class Main {
     // Runs a quiz based on the chosen question bank.
     public static void run(File file) {
         Scanner in = new Scanner(System.in);
+        int totalQs = 0;
+        int correctQs = 0;
         QuestionBank qb = createQuestionBank(file);
         System.out.println(qb + "\n");
 
@@ -48,6 +50,8 @@ public class Main {
                 String input = in.nextLine();
                 // Check if the user is wanting to exit.
                 if (input.equals("-exit")) {
+                    System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.",
+                            ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
                     System.exit(101);
                 // Or if they want the answers.
                 } else if (input.equals("-answer")) {
@@ -55,8 +59,10 @@ public class Main {
                     break;
                 // Otherwise check if they're correct.
                 } else {
+                    totalQs++;
                     if (question.isCorrect(input)) {
                         System.out.println("Correct!");
+                        correctQs++;
                         break;
                     } else {
                         System.out.println("Incorrect.");
