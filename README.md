@@ -1,12 +1,13 @@
 # Revision Questions
 An application that enables you to create question banks and test your knowledge quickly, aimed at use for revision.
 
-To add your own questions, create a .txt file with a suitable name, place it in the top level directory, and use the template below to create your questions:
+## Get Started
+1. Download the latest release [here](https://github.com/AeJae/Revision-Questions/releases).
+2. Create your own personalised question bank using the examples below to correctly format a .txt file for the program to use.
+3. Place this .txt file in the top level directory.
+4. When asked from within the program, enter the name you gave your file (excluding the .txt).
 
-```plaintext
-questionType,questionSource,questionTitle,[questionOptions]&questionType,questionSource,questionTitle,[questionOptions]&questionType,questionSource,questionTitle,[questionOptions]&
-```
-Then from within the program, when asked for the text file, enter the name you gave it (excluding the .txt).
+You're good to go!
 
 ## Examples
 
@@ -19,13 +20,18 @@ MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1, Option 2, Option
 ### True or False
 `TrueFalse$<Source>$<Question>$<Correct Option>&`
 ```plaintext
-TrueFalse$Lecture 7 Part 1$This is a repository.$True
+TrueFalse$Lecture 7 Part 1$This is a repository.$True&
 ```
 
 ### Text Input
 `TextInput$<Source>$<Question/Fill Blank>$<Correct Entries>&`
 ```plaintext
 TextInput$Lecture 5 Part 2$What is this question for?$[show,example,the readme]&
+```
+
+### A Short Completed File
+```plaintext
+MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1, Option 2, Option 3]$[Option 1, Option3]&TrueFalse$Lecture 7 Part 1$This is a repository.$True&TextInput$Lecture 5 Part 2$What is this question for?$[show,example,the readme]&
 ```
 
 ## A Project by AJSF ([@AeJae](https://github.com/AeJae))
