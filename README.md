@@ -20,6 +20,7 @@ You're good to go!
 ```plaintext
 MultiChoice$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[Option 1; Option3]&
 ```
+`<Choices>` and `<Correct Choices>` must always be in list form, even if there is only one option.
 
 ### True or False
 `TrueFalse$<Source>$<Question>$<Correct Option>&`
@@ -32,6 +33,7 @@ TrueFalse$Lecture 7 Part 1$This is a repository.$True&
 ```plaintext
 TextInput$Lecture 5 Part 2$What is this question for?$[show;example;the readme]&
 ```
+`<Correct Entries>` must always be in list form, even if there is only one option.
 
 ### A Short Completed File
 ```plaintext
