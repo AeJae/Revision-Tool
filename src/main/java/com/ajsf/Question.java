@@ -2,8 +2,9 @@ package com.ajsf;
 
 public abstract class Question {
     // Attributes
-    private String source;
-    private String title;
+    private final String source;
+    private final String title;
+
 
     // Constructor
     public Question(String source, String title) {
@@ -11,21 +12,28 @@ public abstract class Question {
         this.title = title;
     }
 
+
     // Misc Methods
     protected static String[] toArray(String string) {
         return string.substring(1, string.length()-1).split(";");
     }
 
+    // Question Output (toString)
     public abstract String toString();
 
-    // Mutators
-    public void setSource(String source) {
-        this.source = source;
+    // Check Answer
+    public abstract Boolean isCorrect(String entry);
+
+    // Checks if a string is in an array of this program's format
+    protected static Boolean inArray(String input, String[] array) {
+        for (String s : array) {
+            if (s.equalsIgnoreCase(input)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     // Accessors
     public String getSource() {

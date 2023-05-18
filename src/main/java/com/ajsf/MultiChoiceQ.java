@@ -1,10 +1,5 @@
 package com.ajsf;
 
-import static com.ajsf.Main.inArray;
-
-import java.util.Arrays;
-import java.util.Scanner;
-
 // Multiple Choice Question
 public class MultiChoiceQ extends Question {
     // Attributes
@@ -33,6 +28,12 @@ public class MultiChoiceQ extends Question {
         return q.toString();
     }
 
+    // Check Answer
+    @Override
+    public Boolean isCorrect(String entry) {
+        return inArray(entry, this.getCorrectChoices());
+    }
+
 
     // Accessors
     public String[] getChoices() {
@@ -41,30 +42,5 @@ public class MultiChoiceQ extends Question {
 
     public String[] getCorrectChoices() {
         return correctChoices;
-    }
-
-
-    // Testing
-    public static void main(String[] args) {
-        // Prototype Script
-        Scanner in = new Scanner(System.in);
-        MultiChoiceQ q1 = new MultiChoiceQ("Test Source", "Does this work?", "[Yes;No;Maybe]", "[3]");
-
-        while (true) {
-            System.out.println(q1);
-            String entry = in.nextLine();
-
-            if (inArray(entry, q1.getCorrectChoices())) {
-                System.out.println("Correct");
-                break;
-            } else if (entry.equals("-exit")) {
-                System.exit(1);
-            } else if (entry.equals("-answer") || entry.equals("-answers")) {
-                System.out.println(Arrays.toString(q1.getCorrectChoices()));
-                break;
-            } else {
-                System.out.println("Incorrect");
-            }
-        }
     }
 }
