@@ -15,7 +15,7 @@ public class TrueFalseQ extends Question {
     // Question Output (toString)
     @Override
     public String toString() {
-        return String.format("[From %s]\n%s", this.getSource(), this.getTitle());
+        return String.format("[From %s] [%s]\n%s", this.getSource(), this.getType(), this.getTitle());
     }
 
 
