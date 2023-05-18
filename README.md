@@ -19,7 +19,7 @@ You're good to go!
 ### Multiple Choice
 `Multi$<Source>$<Question>$<Choices>$<Correct Choices>&`
 ```plaintext
-Multi$Lecture 1 Part 1$Here are three options:$[Option 1; Option 2; Option 3]$[1;3]&
+Multi$Lecture 1 Part 1$Here are three options:$[Option 1;Option 2;Option 3]$[1;3]&
 ```
 `<Choices>` and `<Correct Choices>` must always be in list form, even if there is only one option. `<Correct Choices>` must be an integer representing the correct item(s) from the `<Choices>` list. It is NOT zero indexed.
 
