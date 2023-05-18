@@ -1,15 +1,15 @@
-# Revision Questions
+# Revision Tool
 An application that enables you to create question banks and test your knowledge quickly, aimed at use for exam revision.
 
 ## Quick Start Guide
-1. Download the latest release [here](https://github.com/AeJae/Revision-Questions/releases).
-2. Create your own personalised question bank using [the instructions from the wiki.](https://github.com/AeJae/Revision-Questions/wiki/Getting-Started)
+1. Download the latest release [here](https://github.com/AeJae/Revision-Tool/releases).
+2. Create your own personalised question bank using [the instructions from the wiki.](https://github.com/AeJae/Revision-Tool/wiki/Getting-Started)
 3. Place this .txt file in the top level directory.
 4. When asked from within the program, enter the name you gave your file (excluding the .txt).
 
 You're good to go!
 
-## View the [Wiki](https://github.com/AeJae/Revision-Questions/wiki) for a Full Guide
+## View the [Wiki](https://github.com/AeJae/Revision-Tool/wiki) for a Full Guide
 
 **Enjoy, and I hope you find this useful.**
 
