@@ -14,6 +14,7 @@ You're good to go!
 - `$` is used to separate sections within a question.
 - `[]` is used to denote a list.
 - `;` is used to separate items in a list.
+- Aside from the question type (Multi, TF, Text), there is no requirement on use of upper or lower case.
 
 ### Multiple Choice
 `Multi$<Source>$<Question>$<Choices>$<Correct Choices>&`
