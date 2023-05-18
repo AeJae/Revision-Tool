@@ -3,10 +3,12 @@ package com.ajsf;
 import java.util.Arrays;
 import java.util.Scanner;
 
+// Multiple Choice Question
 public class MultiChoiceQ extends Question {
     // Attributes
     private final String[] choices;
     private final String[] correctChoices;
+
 
     // Constructor
     public MultiChoiceQ(String source, String title, String choices, String correctChoices) {
@@ -15,6 +17,8 @@ public class MultiChoiceQ extends Question {
         this.correctChoices = toArray(correctChoices);
     }
 
+
+    // Question Output (toString)
     @Override
     public String toString() {
         int count = 1;
@@ -27,6 +31,7 @@ public class MultiChoiceQ extends Question {
         return q.toString();
     }
 
+
     // Accessors
     public String[] getChoices() {
         return choices;
@@ -36,14 +41,17 @@ public class MultiChoiceQ extends Question {
         return correctChoices;
     }
 
+
     // Testing
     public static void main(String[] args) {
+        // Prototype Script
         Scanner in = new Scanner(System.in);
         MultiChoiceQ q1 = new MultiChoiceQ("Test Source", "Does this work?", "[Yes;No;Maybe]", "[3]");
 
         while (true) {
             System.out.println(q1);
             String entry = in.nextLine();
+
             if (inArray(entry, q1.getCorrectChoices())) {
                 System.out.println("Correct");
                 break;
