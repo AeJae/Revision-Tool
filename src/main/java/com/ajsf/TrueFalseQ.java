@@ -8,6 +8,11 @@ public class TrueFalseQ extends Question {
         super(source, title);
     }
 
+    @Override
+    public String toString() {
+        return null;
+    }
+
     // Mutators
 
     // Accessors
