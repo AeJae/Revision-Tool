@@ -26,6 +26,9 @@ public abstract class Question {
     // Check Answer
     public abstract Boolean isCorrect(String entry);
 
+    // Get Answer
+    public abstract String[] getAnswer();
+
     // Checks if a string is in an array of this program's format
     protected static Boolean inArray(String input, String[] array) {
         for (String s : array) {

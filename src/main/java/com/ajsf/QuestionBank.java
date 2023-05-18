@@ -28,6 +28,10 @@ public class QuestionBank {
         questions.remove(index);
     }
 
+    public Question getQuestion(int index) {
+        return questions.get(index);
+    }
+
     public int bankSize() {
         return questions.size();
     }
