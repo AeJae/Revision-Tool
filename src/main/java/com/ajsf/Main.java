@@ -59,6 +59,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int totalQs = 0;
         int correctQs = 0;
+        boolean statsReset = false;
         QuestionBank qb = createQuestionBank(file);
         originalQuestionBank = qb;
         System.out.println(qb + "\n");
@@ -71,39 +72,44 @@ public class Main {
 
             // Keep asking the same question until the user is correct, asks for the answer, or quits.
             while (!next) {
+                next = true;
                 System.out.println("\n" + question);
                 String input = in.nextLine();
 
                 switch (input) {
                     // Check if the user is wanting to quit.
                     case "-quit" -> {
-                        System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.",
+                        String statsOut = String.format("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.",
                                 ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
+                        if (statsReset) {
+                            statsOut = statsOut + " [Statistics Reset During Session]";
+                        }
+                        System.out.println(statsOut);
                         System.exit(101);
                     }
                     // Or if they want the answers.
-                    case "-answer" -> {
-                        System.out.println(Arrays.toString(question.getAnswer()));
-                        next = true;
-                    }
+                    case "-answer" -> System.out.println(Arrays.toString(question.getAnswer()));
+                    // Or if they want to skip.
+                    case "-skip" -> System.out.println("<Skipped>");
                     // Or if they want to view their stats.
-                    case "-stats" -> System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.%n",
-                            ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
+                    case "-stats" -> {
+                        String statsOut = String.format("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.",
+                                ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
+                        if (statsReset) {
+                            statsOut = statsOut + " [Statistics Reset During Session]";
+                        }
+                        System.out.println(statsOut);
+                        next = false;
+                    }
                     // Or if they want to apply a filter.
-                    case "-filter" -> {
-                        qb = applyFilterTo(qb, false);
-                        next = true;
-                    }
+                    case "-filter" -> qb = applyFilterTo(qb, false);
                     // Or if they want to reset filters.
-                    case "-reset filters" -> {
-                        qb = applyFilterTo(qb, true);
-                        next = true;
-                    }
+                    case "-reset filters" -> qb = applyFilterTo(qb, true);
                     // Or if they want to reset statistics.
                     case "-reset stats" -> {
+                        statsReset = true;
                         totalQs = correctQs = 0;
                         System.out.println("<Reset Statistics>");
-                        next = true;
                     }
                     // Otherwise they've entered an answer, which we should check is correct.
                     default -> {
@@ -111,9 +117,9 @@ public class Main {
                         if (question.isCorrect(input)) {
                             System.out.println("Correct!");
                             correctQs++;
-                            next = true;
                         } else {
                             System.out.println("Incorrect.");
+                            next = false;
                         }
                     }
                 }
