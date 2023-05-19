@@ -13,7 +13,7 @@ public class QuestionBank {
     // The question bank itself.
     private ArrayList<Question> questions = new ArrayList<>();
 
-    // Outputs the entire bank.
+    // Outputs the entire question bank.
     public String toString() {
         StringBuilder s = new StringBuilder("\nBANK OF SIZE " + this.bankSize() + ":");
         int question = 0;
@@ -38,7 +38,7 @@ public class QuestionBank {
             }
         }
 
-        // Check that the filter is valid.
+        // Check that the chosen filter is valid.
         if (questionsFound == 0) {
             throw new InvalidSourceException(source);
         }
