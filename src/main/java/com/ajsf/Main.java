@@ -83,10 +83,8 @@ public class Main {
                         System.out.println(Arrays.toString(question.getAnswer()));
                         next = true;
                     }
-                    case "-stats" -> {
-                        System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.%n",
-                                ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
-                    }
+                    case "-stats" -> System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.%n",
+                            ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
                     // Or if they want to filter the questions.
                     case "-filter" -> {
                         qb = applyFilterTo(qb, false);
