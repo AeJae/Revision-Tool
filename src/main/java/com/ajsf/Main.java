@@ -23,9 +23,11 @@ import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
-    // Used so that question filters can be removed.
+    // Used so question filters can be removed.
     public static QuestionBank originalQuestionBank = null;
 
+
+    // Main
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("\nWelcome! Use -quit to exit at any time, and once answering questions -answer to view " +
@@ -36,6 +38,7 @@ public class Main {
             System.out.println("\nPlease enter the name of the question bank:");
             String input = in.nextLine();
 
+            // Check if the user wants to quit.
             if (input.equals("-quit")) {
                 System.exit(100);
             }
@@ -83,9 +86,10 @@ public class Main {
                         System.out.println(Arrays.toString(question.getAnswer()));
                         next = true;
                     }
+                    // Or if they want to view their stats.
                     case "-stats" -> System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.%n",
                             ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
-                    // Or if they want to filter the questions.
+                    // Or if they want to apply a filter.
                     case "-filter" -> {
                         qb = applyFilterTo(qb, false);
                         next = true;
@@ -101,7 +105,7 @@ public class Main {
                         System.out.println("<Reset Statistics>");
                         next = true;
                     }
-                    // Otherwise check if they're correct.
+                    // Otherwise they've entered an answer, which we should check is correct.
                     default -> {
                         totalQs++;
                         if (question.isCorrect(input)) {
@@ -145,6 +149,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
+        // Triggered if the user has incorrectly formatted their question bank. Used for diagnostics.
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("0x" + count + " - Invalid question: " + lastQ);
             e.printStackTrace();
@@ -156,20 +161,22 @@ public class Main {
 
     // Applies a user-defined filter to served questions.
     public static QuestionBank applyFilterTo(QuestionBank unfiltered, boolean quickReset) {
+        // Used only for the '-reset filters' command.
         if (quickReset) {
             System.out.println("<Reset Filters>");
             return originalQuestionBank;
         }
 
+        // Initial variables.
         boolean finished = false;
         Scanner in = new Scanner(System.in);
         QuestionBank newQuestionBank = unfiltered;
 
-        // Filter dialogue interface start.
+        // Interface start for the filter dialogue.
         System.out.printf("%n%sFilter Dialogue%s%nTo go back, use '-back'.%nTo remove all filters use '-reset'." +
                         "%nEnter the question source you'd like:%n", "-".repeat(17), "-".repeat(17));
 
-        // Run until a valid source is chosen or the user wants to go back.
+        // Keep asking for a filter until a valid source is chosen or the user wants to go back.
         while (!finished) {
             String chosenSource = in.nextLine();
 
@@ -178,6 +185,7 @@ public class Main {
                 System.out.println("Current filters were retained.\n" + "-".repeat(49));
                 break;
             }
+
             // Check if the user wants to reset filters.
             if (chosenSource.equalsIgnoreCase("-reset")) {
                 System.out.println("Removed all filters.\n" + "-".repeat(49));
