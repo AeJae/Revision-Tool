@@ -66,13 +66,13 @@ public class Main {
 
         // Infinitely test randomly chosen questions.
         while (true) {
-            boolean next = false;
+            boolean repeat = true;
             int rand = ThreadLocalRandom.current().nextInt(0, qb.bankSize());
             Question question = qb.getQuestion(rand);
 
-            // Keep asking the same question until the user is correct, asks for the answer, or quits.
-            while (!next) {
-                next = true;
+            // Keep asking the same question where appropriate. Unless told to repeat, the next question is chosen.
+            while (repeat) {
+                repeat = false;
                 System.out.println("\n" + question);
                 String input = in.nextLine();
 
@@ -99,7 +99,7 @@ public class Main {
                             statsOut = statsOut + " [Statistics Reset During Session]";
                         }
                         System.out.println(statsOut);
-                        next = false;
+                        repeat = true;
                     }
                     // Or if they want to apply a filter.
                     case "-filter" -> qb = applyFilterTo(qb, false);
@@ -119,7 +119,7 @@ public class Main {
                             correctQs++;
                         } else {
                             System.out.println("Incorrect.");
-                            next = false;
+                            repeat = true;
                         }
                     }
                 }
@@ -191,12 +191,15 @@ public class Main {
                 System.out.println("Current filters were retained.\n" + "-".repeat(49));
                 break;
             }
-
             // Check if the user wants to reset filters.
             if (chosenSource.equalsIgnoreCase("-reset")) {
                 System.out.println("Removed all filters.\n" + "-".repeat(49));
                 newQuestionBank = originalQuestionBank;
                 break;
+            }
+            // Check if the user wants to quit.
+            if (chosenSource.equalsIgnoreCase("-quit")) {
+                System.exit(102);
             }
 
             // Otherwise apply the filter, given there are matching questions.
