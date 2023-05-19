@@ -92,11 +92,15 @@ public class Main {
     // Creates a question bank and populates it with questions from a passed text file.
     public static QuestionBank createQuestionBank(File file) {
         QuestionBank qb = new QuestionBank();
+        String lastQ = "";
+        int count = -1;
         try {
             // Add each question to the bank without loading the entire file into memory.
             Scanner scanner = new Scanner(file).useDelimiter("&");
             while (scanner.hasNext()) {
+                count++;
                 String[] data = scanner.next().split("\\$");
+                lastQ = Arrays.toString(data);
                 switch (data[0]) {
                     case "TF" -> {
                         boolean ans;
@@ -105,11 +109,17 @@ public class Main {
                     }
                     case "Text" -> qb.addQuestion(new TextInputQ(data[1], data[2], data[3]));
                     case "Multi" -> qb.addQuestion(new MultiChoiceQ(data[1], data[2], data[3], data[4]));
-                    default -> throw new RuntimeException("Invalid question type: " + data[0]);
+                    default -> throw new RuntimeException(String.format("0x%d - Invalid question type: '%s'.",
+                            count, data[0]));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("0x" + count + " - Invalid question: " + lastQ);
+            e.printStackTrace();
+            System.exit(-1);
         }
         return qb;
     }
