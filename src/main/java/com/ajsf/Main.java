@@ -23,16 +23,23 @@ import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
+    // Used so question filters can be removed.
+    public static QuestionBank originalQuestionBank = null;
+
+
+    // Main
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome!\nUse -exit to view stats and close, and use -answer to view question answers.");
+        System.out.println("\nWelcome! Use -quit to exit at any time, and once answering questions -answer to view " +
+                "question answers, or -filter to enter the question filtering dialogue.");
 
-        // Keep asking for a file until a valid one is given or the user asks to exit.
+        // Keep asking for a file until a valid one is given or the user asks to quit.
         while (true) {
-            System.out.println("\nPlease enter the name of the test file:");
+            System.out.println("\nPlease enter the name of the question bank:");
             String input = in.nextLine();
 
-            if (input.equals("-exit")) {
+            // Check if the user wants to quit.
+            if (input.equals("-quit")) {
                 System.exit(100);
             }
 
@@ -41,7 +48,7 @@ public class Main {
                 run(file);
                 break;
             } else {
-                System.out.println("File does not exist. Check the name and location of your file.");
+                System.out.println("File does not exist. Check the name and location of your question bank.");
             }
         }
     }
@@ -53,35 +60,61 @@ public class Main {
         int totalQs = 0;
         int correctQs = 0;
         QuestionBank qb = createQuestionBank(file);
+        originalQuestionBank = qb;
         System.out.println(qb + "\n");
 
         // Infinitely test randomly chosen questions.
         while (true) {
+            boolean next = false;
             int rand = ThreadLocalRandom.current().nextInt(0, qb.bankSize());
             Question question = qb.getQuestion(rand);
 
-            // Keep asking the same question until the user is correct or asks for the answer.
-            while (true) {
+            // Keep asking the same question until the user is correct, asks for the answer, or quits.
+            while (!next) {
                 System.out.println("\n" + question);
                 String input = in.nextLine();
-                // Check if the user is wanting to exit.
-                if (input.equals("-exit")) {
-                    System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.",
+
+                switch (input) {
+                    // Check if the user is wanting to quit.
+                    case "-quit" -> {
+                        System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.",
+                                ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
+                        System.exit(101);
+                    }
+                    // Or if they want the answers.
+                    case "-answer" -> {
+                        System.out.println(Arrays.toString(question.getAnswer()));
+                        next = true;
+                    }
+                    // Or if they want to view their stats.
+                    case "-stats" -> System.out.printf("%nMark: %.1f%%. Total Correct: %d. Total Answered: %d.%n",
                             ((double) correctQs / (double) totalQs) * 100, correctQs, totalQs);
-                    System.exit(101);
-                // Or if they want the answers.
-                } else if (input.equals("-answer")) {
-                    System.out.println(Arrays.toString(question.getAnswer()));
-                    break;
-                // Otherwise check if they're correct.
-                } else {
-                    totalQs++;
-                    if (question.isCorrect(input)) {
-                        System.out.println("Correct!");
-                        correctQs++;
-                        break;
-                    } else {
-                        System.out.println("Incorrect.");
+                    // Or if they want to apply a filter.
+                    case "-filter" -> {
+                        qb = applyFilterTo(qb, false);
+                        next = true;
+                    }
+                    // Or if they want to reset filters.
+                    case "-reset filters" -> {
+                        qb = applyFilterTo(qb, true);
+                        next = true;
+                    }
+                    // Or if they want to reset statistics.
+                    case "-reset stats" -> {
+                        totalQs = correctQs = 0;
+                        System.out.println("<Reset Statistics>");
+                        next = true;
+                    }
+                    // Otherwise they've entered an answer, which we should check is correct.
+                    default -> {
+                        totalQs++;
+                        if (question.isCorrect(input)) {
+                            System.out.println("Correct!");
+                            correctQs++;
+                            next = true;
+                        } else {
+                            System.out.println("Incorrect.");
+                        }
                     }
                 }
             }
@@ -109,18 +142,68 @@ public class Main {
                     }
                     case "Text" -> qb.addQuestion(new TextInputQ(data[1], data[2], data[3]));
                     case "Multi" -> qb.addQuestion(new MultiChoiceQ(data[1], data[2], data[3], data[4]));
-                    default -> throw new RuntimeException(String.format("0x%d - Invalid question type: '%s'.",
-                            count, data[0]));
+                    default -> throw new RuntimeException(String.format("0x%d - Invalid question: '%s'.",
+                            count, lastQ));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
+        // Triggered if the user has incorrectly formatted their question bank. Used for diagnostics.
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("0x" + count + " - Invalid question: " + lastQ);
             e.printStackTrace();
             System.exit(-1);
         }
         return qb;
+    }
+
+
+    // Applies a user-defined filter to served questions.
+    public static QuestionBank applyFilterTo(QuestionBank unfiltered, boolean quickReset) {
+        // Used only for the '-reset filters' command.
+        if (quickReset) {
+            System.out.println("<Reset Filters>");
+            return originalQuestionBank;
+        }
+
+        // Initial variables.
+        boolean finished = false;
+        Scanner in = new Scanner(System.in);
+        QuestionBank newQuestionBank = unfiltered;
+
+        // Interface start for the filter dialogue.
+        System.out.printf("%n%sFilter Dialogue%s%nTo go back, use '-back'.%nTo remove all filters use '-reset'." +
+                        "%nEnter the question source you'd like:%n", "-".repeat(17), "-".repeat(17));
+
+        // Keep asking for a filter until a valid source is chosen or the user wants to go back.
+        while (!finished) {
+            String chosenSource = in.nextLine();
+
+            // Check if the user wants to go back.
+            if (chosenSource.equalsIgnoreCase("-back")) {
+                System.out.println("Current filters were retained.\n" + "-".repeat(49));
+                break;
+            }
+
+            // Check if the user wants to reset filters.
+            if (chosenSource.equalsIgnoreCase("-reset")) {
+                System.out.println("Removed all filters.\n" + "-".repeat(49));
+                newQuestionBank = originalQuestionBank;
+                break;
+            }
+
+            // Otherwise apply the filter, given there are matching questions.
+            try {
+                newQuestionBank = unfiltered.filter(chosenSource);
+                System.out.println("Filter applied successfully.");
+                System.out.println("-".repeat(49));
+                finished = true;
+            } catch (InvalidSourceException e) {
+                System.out.println("Invalid filter, please try again:");
+            }
+        }
+
+        return newQuestionBank;
     }
 }
