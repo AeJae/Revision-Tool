@@ -25,7 +25,7 @@ public class MultiChoiceQ extends Question {
     @Override
     public String toString() {
         int count = 1;
-        StringBuilder q = new StringBuilder(String.format("\n[From %s] [%s]\n%s\n", this.getSource(), this.getType(),
+        StringBuilder q = new StringBuilder(String.format("[From %s] [%s]\n%s\n", this.getSource(), this.getType(),
                 this.getTitle()));
         for (String s : choices) {
             q.append(count).append(". ").append(s).append("\n");
