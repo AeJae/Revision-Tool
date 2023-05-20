@@ -143,7 +143,14 @@ public class Main {
                 switch (data[0]) {
                     case "TF" -> {
                         boolean ans;
-                        ans = data[3].equalsIgnoreCase("true");
+                        if (data[3].equalsIgnoreCase("true")) {
+                            ans = true;
+                        } else if (data[3].equalsIgnoreCase("false")) {
+                            ans = false;
+                        } else {
+                            throw new RuntimeException(String.format("0x%d - Invalid true or false question answer: " +
+                                    "'%s'. Full question:%n%s", count, data[3], lastQ));
+                        }
                         qb.addQuestion(new TrueFalseQ(data[1], data[2], ans));
                     }
                     case "Text" -> qb.addQuestion(new TextInputQ(data[1], data[2], data[3]));
