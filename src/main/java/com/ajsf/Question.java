@@ -29,6 +29,9 @@ public abstract class Question {
     // Question Output (toString)
     public abstract String toString();
 
+    // Question Output
+    public abstract String getPresentable(boolean showSource);
+
     // Check Answer
     public abstract Boolean isCorrect(String entry);
 

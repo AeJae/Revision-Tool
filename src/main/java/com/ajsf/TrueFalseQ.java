@@ -24,6 +24,18 @@ public class TrueFalseQ extends Question {
         return String.format("[From %s] [%s]\n%s", this.getSource(), this.getType(), this.getTitle());
     }
 
+    // Question Output
+    @Override
+    public String getPresentable(boolean showSource) {
+        String out = "";
+        // If source should be shown, add it to the start.
+        if (showSource) {
+            out += "[From " + this.getSource() + "] ";
+        }
+        // Add the question type, and the question itself.
+        out += String.format("[%s]\n%s", this.getType(), this.getTitle());
+        return out;
+    }
 
     // Check Answer
     public Boolean isCorrect(String entry) {

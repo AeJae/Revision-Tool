@@ -35,6 +35,24 @@ public class MultiChoiceQ extends Question {
         return q.toString();
     }
 
+    // Question Output
+    @Override
+    public String getPresentable(boolean showSource) {
+        int count = 1;
+        StringBuilder q = new StringBuilder();
+        // If the source should be shown, add it at the start.
+        if (showSource) {
+            q.append("[").append(this.getSource()).append("] ");
+        }
+        // Add the question type, title and options.
+        q.append(String.format("[%s]\n%s\n", this.getType(), this.getTitle()));
+        for (String s : choices) {
+            q.append(count).append(". ").append(s).append("\n");
+        }
+        q.append("\nEnter choice:");
+        return q.toString();
+    }
+
     // Check Answer
     @Override
     public Boolean isCorrect(String entry) {

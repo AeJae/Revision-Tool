@@ -59,6 +59,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int totalQs = 0;
         int correctQs = 0;
+        boolean showSource = true;
         boolean statsReset = false;
         QuestionBank qb = createQuestionBank(file);
         originalQuestionBank = qb;
@@ -73,7 +74,7 @@ public class Main {
             // Keep asking the same question where appropriate. Unless told to repeat, the next question is chosen.
             while (repeat) {
                 repeat = false;
-                System.out.println("\n" + question);
+                System.out.println("\n" + question.getPresentable(showSource));
                 String input = in.nextLine();
 
                 switch (input) {
@@ -100,6 +101,16 @@ public class Main {
                         }
                         System.out.println(statsOut);
                         repeat = true;
+                    }
+                    // Or if they want sources to be hidden.
+                    case "-hide source" -> {
+                        showSource = false;
+                        System.out.println("<Sources Hidden>");
+                    }
+                    // Or if they want sources to be shown.
+                    case "-show source" -> {
+                        showSource = true;
+                        System.out.println("<Sources Shown>");
                     }
                     // Or if they want to apply a filter.
                     case "-filter" -> qb = applyFilterTo(qb, false);
